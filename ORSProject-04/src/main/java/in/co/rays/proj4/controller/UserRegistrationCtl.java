@@ -16,7 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Handles user registration requests and processes new user account creation.
  * 
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/UserRegistrationCtl")
 public class UserRegistrationCtl extends BaseCtl<UserBean, UserModel> {

@@ -19,7 +19,8 @@ import in.co.rays.proj4.util.JDBCDataSource;
  * Provides common database operations for models using generic bean types. The
  * generic type T must extend BaseBean.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 public abstract class BaseModel<T extends BaseBean> { // T ka meaning Generic Type hai. BaseModel kisi bhi aise Bean ke
 														// saath kaam karega jo BaseBean ko extend karta hai.

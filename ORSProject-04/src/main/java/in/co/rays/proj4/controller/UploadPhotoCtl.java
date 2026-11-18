@@ -28,7 +28,8 @@ import jakarta.servlet.http.Part;
  * It supports displaying uploaded photos, providing a default photo,
  * and updating user photo information.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/UploadPhotoCtl")
 @MultipartConfig

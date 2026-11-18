@@ -6,7 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 /**
  * Handles requests for the welcome page.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/WelcomeCtl")
 public class WelcomeCtl extends BaseCtl {

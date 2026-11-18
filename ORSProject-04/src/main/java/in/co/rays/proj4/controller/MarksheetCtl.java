@@ -11,7 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Controller responsible for handling marksheet-related operations such as
  * validating and populating student marks details.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/MarksheetCtl")
 public class MarksheetCtl extends BaseCtl<MarksheetBean, MarksheetModel> {

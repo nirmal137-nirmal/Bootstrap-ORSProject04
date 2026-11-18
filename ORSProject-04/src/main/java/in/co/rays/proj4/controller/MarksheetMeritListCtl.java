@@ -12,9 +12,27 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Controller class responsible for displaying the marksheet merit list.
+ * <p>
+ * Retrieves the merit list from MarksheetModel and forwards it to the
+ * Marksheet Merit List view.
+ * </p>
+ *
+ * @author Nirmal Fayake
+ * @version 1.0
+ */
 @WebServlet(urlPatterns = { "/ctl/MarksheetMeritListCtl" })
 public class MarksheetMeritListCtl extends BaseListCtl<MarksheetBean, MarksheetModel> {
 
+	/**
+	 * Handles GET requests to retrieve and display the marksheet merit list.
+	 *
+	 * @param request  HttpServletRequest object
+	 * @param response HttpServletResponse object
+	 * @throws ServletException if a servlet-related error occurs
+	 * @throws IOException      if an input/output error occurs
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -32,17 +50,35 @@ public class MarksheetMeritListCtl extends BaseListCtl<MarksheetBean, MarksheetM
 		}
 	}
 
+	/**
+	 * Handles POST requests by delegating the request to the doGet method.
+	 *
+	 * @param request  HttpServletRequest object
+	 * @param response HttpServletResponse object
+	 * @throws ServletException if a servlet-related error occurs
+	 * @throws IOException      if an input/output error occurs
+	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doGet(request, response);
 	}
 
+	/**
+	 * Returns the view path of the Marksheet Merit List page.
+	 *
+	 * @return the Marksheet Merit List view path
+	 */
 	@Override
 	public String getView() {
 		return ORSView.MARKSHEET_MERIT_LIST_VIEW;
 	}
 
+	/**
+	 * Returns a new instance of MarksheetModel for database operations.
+	 *
+	 * @return a new MarksheetModel object
+	 */
 	@Override
 	public MarksheetModel getModel() {
 		return new MarksheetModel();

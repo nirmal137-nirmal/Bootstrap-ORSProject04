@@ -9,7 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 /**
  * Controller responsible for displaying and searching the list of courses.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * 
+ * @version 1.0
  */
 @WebServlet("/ctl/CourseListCtl")
 public class CourseListCtl extends BaseListCtl<CourseBean, CourseModel> {

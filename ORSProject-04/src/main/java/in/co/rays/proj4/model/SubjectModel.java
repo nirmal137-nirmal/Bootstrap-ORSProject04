@@ -15,7 +15,8 @@ import in.co.rays.proj4.util.JDBCDataSource;
  * Provides database operations for managing subject records, including adding,
  * updating, searching and retrieving subject details.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 public class SubjectModel extends BaseModel<SubjectBean> {
 

@@ -16,7 +16,8 @@ import in.co.rays.proj4.util.JDBCDataSource;
  * Provides database operations for managing faculty records, including adding,
  * updating, searching and retrieving faculty details.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 public class FacultyModel extends BaseModel<FacultyBean> {
 

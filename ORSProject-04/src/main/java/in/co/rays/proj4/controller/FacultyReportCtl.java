@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
  * Mapped to {@code /ctl/FacultyReportCtl}; add {@code ?type=doc} for Word
  * output.
  *
- * @author Rays EdTech
+ * @author Nirmal Fayake
  * @version 1.0
  * @see BaseReportCtl
  */

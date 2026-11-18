@@ -3,22 +3,42 @@ package in.co.rays.proj4.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.CourseBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.util.JDBCDataSource;
 
+/**
+ * CourseModel provides database operations and business logic for managing
+ * course records, including adding, updating, searching, and filtering courses.
+ *
+ * @author Nirmal Fayake
+ * @version 1.0
+ */
 public class CourseModel extends BaseModel<CourseBean> {
 
+	private static Logger log = Logger.getLogger(CourseModel.class);
+
+	/**
+	 * Adds a new course record to the database.
+	 * Checks for duplicate course names before inserting the record.
+	 *
+	 * @param bean CourseBean containing course details
+	 * @return primary key of the inserted course
+	 * @throws ApplicationException if a database error occurs
+	 * @throws DuplicateRecordException if course name already exists
+	 */
 	@Override
 	public long add(CourseBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
 		int pk = 0;
-		
+
 		CourseBean existBean = findByName(bean.getName());
-		
-		if(existBean != null) {
+
+		if (existBean != null) {
 			throw new DuplicateRecordException("name already exits");
 		}
 
@@ -38,10 +58,10 @@ public class CourseModel extends BaseModel<CourseBean> {
 			pstmt.setTimestamp(8, bean.getModifiedDatetime());
 			pstmt.executeUpdate();
 			conn.commit();
-			System.out.println("Record Inserted Successfully");
+			log.info("Record Inserted Successfully");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception in adding course", e);
 			JDBCDataSource.trnRollBack(conn);
 		} finally {
 			JDBCDataSource.closeConnection(conn);
@@ -49,13 +69,21 @@ public class CourseModel extends BaseModel<CourseBean> {
 		return pk;
 	}
 
+	/**
+	 * Updates an existing course record in the database.
+	 * Checks for duplicate course names before updating the record.
+	 *
+	 * @param bean CourseBean containing updated course details
+	 * @throws ApplicationException if a database error occurs
+	 * @throws DuplicateRecordException if course name already exists
+	 */
 	@Override
 	public void update(CourseBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
-		
+
 		CourseBean existBean = findByName(bean.getName());
-		
-		if(existBean != null && existBean.getId() != bean.getId()) {
+
+		if (existBean != null && existBean.getId() != bean.getId()) {
 			throw new DuplicateRecordException("name already exist");
 		}
 
@@ -76,10 +104,10 @@ public class CourseModel extends BaseModel<CourseBean> {
 			pstmt.setLong(8, bean.getId());
 			pstmt.executeUpdate();
 			conn.commit();
-			System.out.println("Record Updated Successfully");
+			log.info("Record Updated Successfully");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception in updating course", e);
 			JDBCDataSource.trnRollBack(conn);
 		} finally {
 			JDBCDataSource.closeConnection(conn);
@@ -87,6 +115,12 @@ public class CourseModel extends BaseModel<CourseBean> {
 
 	}
 
+	/**
+	 * Generates the WHERE clause dynamically based on the provided course bean.
+	 *
+	 * @param bean CourseBean containing search criteria
+	 * @return dynamically generated SQL WHERE conditions
+	 */
 	@Override
 	public String getWhereClause(CourseBean bean) {
 
@@ -122,21 +156,37 @@ public class CourseModel extends BaseModel<CourseBean> {
 
 		return sql.toString();
 	}
-	
+
+	/**
+	 * Finds a course record using its unique name.
+	 *
+	 * @param name course name to search
+	 * @return CourseBean if found, otherwise null
+	 */
 	public CourseBean findByName(String name) {
-		
+
 		CourseBean bean = findByUniqueColumn("name", name);
-		
+
 		return bean;
-		
+
 	}
 
+	/**
+	 * Returns the database table name used for course operations.
+	 *
+	 * @return course table name
+	 */
 	@Override
 	public String getTable() {
 		// TODO Auto-generated method stub
 		return "st_course";
 	}
 
+	/**
+	 * Creates and returns a new CourseBean object.
+	 *
+	 * @return new CourseBean instance
+	 */
 	@Override
 	public CourseBean getBean() {
 		// TODO Auto-generated method stub

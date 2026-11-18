@@ -18,6 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
  * @param <B> the type of bean extending BaseBean
  * @param <M> the type of model extending BaseModel
  * @author Nirmal Fayake
+ * 
+ * @version 1.0
  */
 public abstract class BaseListCtl<B extends BaseBean, M extends BaseModel> extends BaseCtl<B, M> {
 

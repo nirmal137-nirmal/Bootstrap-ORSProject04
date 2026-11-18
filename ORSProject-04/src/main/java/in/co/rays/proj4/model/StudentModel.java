@@ -15,7 +15,8 @@ import in.co.rays.proj4.util.JDBCDataSource;
  * Provides database operations for managing student records, including adding,
  * updating, searching and retrieving student details.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 public class StudentModel extends BaseModel<StudentBean> {
 

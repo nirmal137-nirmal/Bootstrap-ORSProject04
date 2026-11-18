@@ -17,7 +17,9 @@ import jakarta.servlet.http.HttpServletRequest;
  * loading college details, validating faculty information, and populating
  * faculty data.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * 
+ * @version 1.0
  */
 @WebServlet("/ctl/FacultyCtl")
 public class FacultyCtl extends BaseCtl<FacultyBean, FacultyModel> {

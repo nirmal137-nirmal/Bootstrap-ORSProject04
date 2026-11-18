@@ -9,7 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 /**
  * Controller responsible for displaying and searching the list of colleges.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * 
+ * @version 1.0
  */
 @WebServlet("/ctl/CollegeListCtl")
 public class CollegeListCtl extends BaseListCtl<CollegeBean, CollegeModel> {

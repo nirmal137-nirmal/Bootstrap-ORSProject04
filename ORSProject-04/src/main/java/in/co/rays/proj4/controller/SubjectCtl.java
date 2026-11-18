@@ -11,7 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Handles subject-related requests, including validation, data population,
  * and navigation to the subject view.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/SubjectCtl")
 public class SubjectCtl extends BaseCtl<SubjectBean, SubjectModel> {

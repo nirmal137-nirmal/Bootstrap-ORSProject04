@@ -10,7 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Handles student list requests, including populating student search criteria
  * and providing the student list view.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/StudentListCtl")
 public class StudentListCtl extends BaseListCtl<StudentBean, StudentModel>{

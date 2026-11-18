@@ -17,7 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
  * the user's email address and sends the password to the registered email
  * address.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ForgetPasswordCtl")
 public class ForgetPasswordCtl extends BaseCtl<UserBean, UserModel> {

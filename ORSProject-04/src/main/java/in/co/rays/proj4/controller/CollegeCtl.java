@@ -11,7 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
  * Controller responsible for handling college-related operations such as
  * validating and populating college details.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * 
+ * @version 1.0
  */
 @WebServlet("/ctl/CollegeCtl")
 public class CollegeCtl extends BaseCtl<CollegeBean, CollegeModel> {

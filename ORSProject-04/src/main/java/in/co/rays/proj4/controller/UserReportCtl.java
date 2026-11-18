@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
  * Report servlet that generates a User list report in PDF or DOC format. Mapped
  * to {@code /ctl/UserReportCtl}; add {@code ?type=doc} for Word output.
  *
- * @author Rays EdTech
+ * @author Nirmal Fayake
  * @version 1.0
  * @see BaseReportCtl
  */

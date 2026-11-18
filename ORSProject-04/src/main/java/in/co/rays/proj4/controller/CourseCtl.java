@@ -11,7 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
  * Controller responsible for handling course-related operations such as
  * validating and populating course details.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * 
+ * @version 1.0
  */
 @WebServlet("/ctl/CourseCtl")
 public class CourseCtl extends BaseCtl<CourseBean, CourseModel> {

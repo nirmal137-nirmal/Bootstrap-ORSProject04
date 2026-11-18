@@ -16,7 +16,9 @@ import jakarta.servlet.http.HttpServletResponse;
  * Controller responsible for handling user password change requests.
  * It validates the input, retrieves the user details, and updates the password.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * 
+ * @version 1.0
  */
 @WebServlet("/ctl/ChangePasswordCtl")
 public class ChangePasswordCtl extends BaseCtl<UserBean, UserModel> {

@@ -14,7 +14,8 @@ import in.co.rays.proj4.util.JDBCDataSource;
 /**
  * Provides database operations for managing college records.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 public class CollegeModel extends BaseModel<CollegeBean> {
 

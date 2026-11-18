@@ -10,7 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Handles subject list requests, including populating subject search criteria
  * and providing the subject list view.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/SubjectListCtl")
 public class SubjectListCtl extends BaseListCtl<SubjectBean, SubjectModel> {

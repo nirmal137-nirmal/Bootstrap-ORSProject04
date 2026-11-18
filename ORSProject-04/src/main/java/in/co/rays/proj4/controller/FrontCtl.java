@@ -18,7 +18,8 @@ import jakarta.servlet.http.HttpSession;
  * Front controller filter that checks whether a user is logged in before
  * allowing access to protected application resources.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 
 // FrontController design pattern is used to prevent/stop any user to access application without login

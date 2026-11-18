@@ -16,7 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Handles user list requests, including loading user records,
  * populating user search criteria, and providing the user list view.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/UserListCtl")
 

@@ -20,7 +20,8 @@ import jakarta.servlet.http.HttpSession;
  * It validates user credentials, authenticates users, and manages user
  * session information.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/LoginCtl")
 public class LoginCtl extends BaseCtl<UserBean, UserModel> {

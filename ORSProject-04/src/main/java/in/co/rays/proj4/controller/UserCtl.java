@@ -16,7 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Handles user-related requests, including loading role data,
  * validating user details, and populating user information.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/UserCtl")
 public class UserCtl extends BaseCtl<UserBean, UserModel> {

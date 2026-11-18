@@ -9,7 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 /**
  * Controller responsible for displaying and searching the list of faculty members.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/FacultyListCtl")
 public class FacultyListCtl extends BaseListCtl<FacultyBean, FacultyModel> {

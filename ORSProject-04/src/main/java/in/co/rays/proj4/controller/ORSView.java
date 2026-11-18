@@ -4,7 +4,8 @@ package in.co.rays.proj4.controller;
  * Defines application-wide constants for JSP views, servlet controllers,
  * and report file paths used in the ORS Project.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 public interface ORSView {
 

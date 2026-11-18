@@ -10,7 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Handles role list requests, including populating search criteria
  * and providing the role list view.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/RoleListCtl")
 public class RoleListCtl extends BaseListCtl<RoleBean, RoleModel> {

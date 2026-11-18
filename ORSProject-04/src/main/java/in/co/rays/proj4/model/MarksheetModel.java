@@ -18,7 +18,8 @@ import in.co.rays.proj4.util.JDBCDataSource;
  * Provides database operations for managing marksheet records, including
  * adding, updating, searching and retrieving marksheet details.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 
 public class MarksheetModel extends BaseModel<MarksheetBean> {

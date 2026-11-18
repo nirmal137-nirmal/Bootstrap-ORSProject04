@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * It validates profile data, populates the UserBean,
  * and provides the model and view required for the profile page.
  *
- * @author NirmalFayake
+ * @author Nirmal Fayake
  * @version 1.0
  */
 @WebServlet("/ctl/MyProfileCtl")

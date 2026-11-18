@@ -19,7 +19,9 @@ import jakarta.servlet.http.HttpServletRequest;
  * It checks the language parameter in the request and updates the application
  * locale accordingly.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * 
+ * @version 1.0
  */
 @WebFilter("/*")
 public class LanguageFilter implements Filter {

@@ -16,7 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Handles student-related requests, including loading college data,
  * validating student details, and populating student information.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 @WebServlet("/ctl/StudentCtl")
 public class StudentCtl extends BaseCtl<StudentBean, StudentModel> {

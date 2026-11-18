@@ -19,7 +19,8 @@ import in.co.rays.proj4.util.JDBCDataSource;
  * including registration, authentication, password management and photo
  * updates.
  *
- * @author nirmalfayake
+ * @author Nirmal Fayake
+ * @version 1.0
  */
 public class UserModel extends BaseModel<UserBean> {
 

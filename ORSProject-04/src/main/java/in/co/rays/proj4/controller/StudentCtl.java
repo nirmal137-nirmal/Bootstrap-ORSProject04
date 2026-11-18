@@ -1,0 +1,125 @@
+package in.co.rays.proj4.controller;
+
+import java.util.List;
+
+import in.co.rays.proj4.bean.CollegeBean;
+import in.co.rays.proj4.bean.StudentBean;
+import in.co.rays.proj4.model.CollegeModel;
+import in.co.rays.proj4.model.StudentModel;
+import in.co.rays.proj4.util.DataUtility;
+import in.co.rays.proj4.util.DataValidator;
+import in.co.rays.proj4.util.ServletUtility;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServletRequest;
+
+/**
+ * Handles student-related requests, including loading college data,
+ * validating student details, and populating student information.
+ *
+ * @author nirmalfayake
+ */
+@WebServlet("/ctl/StudentCtl")
+public class StudentCtl extends BaseCtl<StudentBean, StudentModel> {
+
+	/**
+	 * Loads the college list and makes it available to the request.
+	 *
+	 * @param request the HTTP request
+	 */
+	@Override
+	protected void preload(HttpServletRequest request) {
+
+		CollegeModel model = new CollegeModel();
+		List<CollegeBean> collegeList = model.search(null, 0, 0);
+		//request.setAttribute("collegelist", collegeList);
+		ServletUtility.setList(collegeList, request);	
+	}
+
+	/**
+	 * Validates the student details submitted through the HTTP request.
+	 *
+	 * @param request the HTTP request containing student details
+	 * @return true if all required details are valid; false otherwise
+	 */
+	@Override
+	protected boolean validate(HttpServletRequest request) {
+		boolean pass = true;
+
+		if (DataValidator.isNull(request.getParameter("firstName"))) {
+			request.setAttribute("firstName", "firstName is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("lastName"))) {
+			request.setAttribute("lastName", "lastName is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("email"))) {
+			request.setAttribute("email", "email is required");
+			pass = false;
+
+		} else if (!DataValidator.isEmail(request.getParameter("email"))) {
+			request.setAttribute("email", "email is not in valid format");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("mobileNo"))) {
+			request.setAttribute("mobileNo", "mobileNo is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("collegeId"))) {
+			request.setAttribute("collegeId", "collegeId is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("dob"))) {
+			request.setAttribute("dob", "dob is required");
+			pass = false;
+		}
+
+		return pass;
+	}
+
+	/**
+	 * Populates a StudentBean with student details from the HTTP request.
+	 *
+	 * @param request the HTTP request containing student details
+	 * @return the populated StudentBean
+	 */
+	@Override
+	protected StudentBean populateBean(HttpServletRequest request) {
+
+		StudentBean bean = new StudentBean();
+		bean.setId(DataUtility.getLong(request.getParameter("id")));
+		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
+		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
+		bean.setEmail(DataUtility.getString(request.getParameter("email")));
+		bean.setMobileNo(DataUtility.getString(request.getParameter("mobileNo")));
+		bean.setCollegeId(DataUtility.getLong(request.getParameter("collegeId")));
+		bean.setDateOfBirth(DataUtility.getDate(request.getParameter("dob")));
+
+		populateDTO(bean, request);
+
+		return bean;
+	}
+
+	/**
+	 * Creates and returns the StudentModel instance.
+	 *
+	 * @return a new StudentModel instance
+	 */
+	@Override
+	public StudentModel getModel() {
+
+		return new StudentModel();
+	}
+
+	/**
+	 * Returns the JSP view path for student management.
+	 *
+	 * @return the student view path
+	 */
+	@Override
+	public String getView() {
+
+		return ORSView.STUDENT_VIEW;
+	}
+
+}

@@ -1,0 +1,158 @@
+package in.co.rays.proj4.controller;
+
+import java.io.IOException;
+
+import in.co.rays.proj4.bean.UserBean;
+import in.co.rays.proj4.exception.DuplicateRecordException;
+import in.co.rays.proj4.model.UserModel;
+import in.co.rays.proj4.util.DataUtility;
+import in.co.rays.proj4.util.DataValidator;
+import in.co.rays.proj4.util.ServletUtility;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+/**
+ * Handles user registration requests and processes new user account creation.
+ * 
+ * @author nirmalfayake
+ */
+@WebServlet("/UserRegistrationCtl")
+public class UserRegistrationCtl extends BaseCtl<UserBean, UserModel> {
+
+	public static final String OP_SIGN_UP = "SignUp";
+
+	/**
+	 * Validates the user registration form fields.
+	 *
+	 * @param request the HTTP request containing registration details
+	 * @return true if all fields are valid; otherwise false
+	 */
+	@Override
+	protected boolean validate(HttpServletRequest request) {
+
+		boolean pass = true;
+
+		if (DataValidator.isNull(request.getParameter("firstName"))) {
+			request.setAttribute("firstName", "firstName is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("lastName"))) {
+			request.setAttribute("lastName", "lastName is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("login"))) {
+			request.setAttribute("login", "login is required");
+			pass = false;
+		} else if (!DataValidator.isEmail(request.getParameter("login"))) {
+			request.setAttribute("login", "login is not in valid formate");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("password"))) {
+			request.setAttribute("password", "password is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("confirmPassword"))) {
+			request.setAttribute("confirmPassword", "confirmPassword is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("gender"))) {
+			request.setAttribute("gender", "gender is required");
+			pass = false;
+		}
+		if (DataValidator.isNull(request.getParameter("dob"))) {
+			request.setAttribute("dob", "dob is required");
+			pass = false;
+		}
+		if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))
+				&& !"".equals(request.getParameter("confirmPassword"))) {
+			request.setAttribute("confirmPassword", "Confirm  Password  should not be matched.");
+			pass = false;
+		}
+
+		return pass;
+	}
+
+	/**
+	 * Populates a UserBean with registration details submitted by the user.
+	 *
+	 * @param request the HTTP request containing user registration data
+	 * @return the populated UserBean
+	 */
+	@Override
+	protected UserBean populateBean(HttpServletRequest request) {
+
+		UserBean bean = new UserBean();
+
+		// View se get kiya or bean me set kiya
+		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
+		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
+		bean.setLogin(DataUtility.getString(request.getParameter("login")));
+		bean.setPassword(DataUtility.getString(request.getParameter("password")));
+		bean.setConfirmPassword(DataUtility.getString(request.getParameter("confirmPassword")));
+		bean.setGender(DataUtility.getString(request.getParameter("gender")));
+		bean.setDob(DataUtility.getDate(request.getParameter("dob")));
+		bean.setRoleId(2L);
+
+		populateDTO(bean, request);
+
+		return bean;
+	}
+
+	/**
+	 * Processes the user registration form submission and forwards the request
+	 * to the registration view with the appropriate status message.
+	 *
+	 * @param request  the HTTP request containing registration details
+	 * @param response the HTTP response used to forward the request
+	 * @throws ServletException if a servlet-related error occurs
+	 * @throws IOException      if an input or output error occurs
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// operation get kiya
+		String op = DataUtility.getString(request.getParameter("operation"));
+
+		UserBean bean = populateBean(request);
+		// model ka object liya
+		UserModel model = getModel();
+
+		if (OP_SIGN_UP.equalsIgnoreCase(op)) {
+			try {
+				model.register(bean);
+				// model.add(bean);
+				ServletUtility.setSuccessMessage("user is registred, Login now", request);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setErrorMessage("Login id already exists", request);
+			}
+		}
+		bean = populateBean(request);
+		ServletUtility.setBean(bean, request);
+		ServletUtility.forward(getView(), request, response);
+
+	}
+
+	/**
+	 * Creates and returns a new UserModel instance.
+	 *
+	 * @return a new UserModel object
+	 */
+	@Override
+	public UserModel getModel() {
+		return new UserModel();
+	}
+
+	/**
+	 * Returns the view path for the user registration page.
+	 *
+	 * @return the user registration view path
+	 */
+	@Override
+	public String getView() {
+		return ORSView.USER_REGISTRATION_VIEW;
+	}
+
+}

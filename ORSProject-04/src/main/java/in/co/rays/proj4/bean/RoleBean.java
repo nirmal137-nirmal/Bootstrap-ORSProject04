@@ -7,15 +7,16 @@ import java.sql.ResultSet;
  * It extends BaseBean to inherit common properties of the application.
  *
  * @author Nirmal Fayake
+ * 
  * @version 1.0
  */
 public class RoleBean extends BaseBean {
 	
 	public static final int ADMIN = 1;
 	public static final int STUDENT = 2;
-	public static final int COLLEGE_SCHOOL = 3;
-	public static final int KIOSK = 4;
-
+	public static final int FACULTY = 3;
+	public static final int COLLEGE = 4;
+	public static final int KIOSK = 5;
 
 	/** Name of the role. */
 	private String name;

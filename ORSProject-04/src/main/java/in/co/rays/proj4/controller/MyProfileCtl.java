@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * and provides the model and view required for the profile page.
  *
  * @author Nirmal Fayake
+ * 
  * @version 1.0
  */
 @WebServlet("/ctl/MyProfileCtl")
@@ -40,10 +41,11 @@ public class MyProfileCtl extends BaseCtl<UserBean, UserModel> {
 		if (DataValidator.isNull(request.getParameter("login"))) {
 			request.setAttribute("login", "login is required");
 			pass = false;
-		} else if (!request.getParameter("login").matches("[A-Za-z][A-Za-z0-9_]*")) {
-			request.setAttribute("login", "login is not in valid formate");
-			pass = false;
-		}
+		} /*
+			 * else if (!request.getParameter("login").matches("[A-Za-z][A-Za-z0-9_]*")) {
+			 * request.setAttribute("login", "login is not in valid formate"); pass = false;
+			 * }
+			 */
 		if (DataValidator.isNull(request.getParameter("password"))) {
 			request.setAttribute("password", "password is required");
 			pass = false;

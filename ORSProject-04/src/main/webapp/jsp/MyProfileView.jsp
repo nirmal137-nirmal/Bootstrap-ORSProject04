@@ -122,7 +122,7 @@
 								<label class="form-label fw-bold"><i
 									class="bi bi-person-circle text-info"></i> Login <span
 									class="text-danger">*</span></label> <input type="text" name="login"
-									class="form-control"
+									class="form-control" readonly
 									value="<%=DataUtility.getStringData(bean.getLogin())%>"
 									placeholder="enter an email"> <small
 									class="text-danger"><%=ServletUtility.getErrorMessage("login", request)%></small>
@@ -162,7 +162,7 @@
 									class="bi bi-calendar-event-fill text-primary"></i> DOB <span
 									class="text-danger">*</span></label> <input type="date" name="dob"
 									class="form-control"
-									value="<%=DataUtility.getStringData(bean.getDob())%>">
+									value="<%=DataUtility.getDateString(bean.getDob())%>">
 								<small class="text-danger"><%=ServletUtility.getErrorMessage("dob", request)%></small>
 							</div>
 

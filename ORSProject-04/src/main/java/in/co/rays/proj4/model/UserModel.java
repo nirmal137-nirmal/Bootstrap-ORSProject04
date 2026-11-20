@@ -327,7 +327,7 @@ public class UserModel extends BaseModel<UserBean> {
 		try {
 			conn = JDBCDataSource.getConnection();
 			conn.setAutoCommit(false); // Begin transaction
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE ST_USER SET PHOTO = ? WHERE ID = ?");
+			PreparedStatement pstmt = conn.prepareStatement("update st_user set photo= ? where id =?");
 			pstmt.setString(1, photo);
 			pstmt.setLong(2, id);
 			pstmt.executeUpdate();

@@ -403,7 +403,7 @@ map.put("female", ms.get("gender.female"));
 
 									</span>
 
-									<input type="text" name="dob" id="udatee" class="form-control"
+									<input type="date" name="dob" id="udatee" class="form-control"
 										value="<%=DataUtility.getDateString(bean.getDob())%>">
 
 								</div>

@@ -1,6 +1,7 @@
 <%@ page import="in.co.rays.proj4.util.MessageSource"%>
 <%@ page import="in.co.rays.proj4.controller.ORSView"%>
 <%@ page import="in.co.rays.proj4.bean.UserBean"%>
+<%@ page import="in.co.rays.proj4.bean.RoleBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -154,11 +155,40 @@
 	MessageSource ms = MessageSource.getInstance();
 	boolean isLogin = userBean != null;
 	String locale = ms.getLanguage();
+
+	// ================= AUTHORIZATION (role flags) =================
+	boolean isAdmin = isLogin && userBean.getRoleId() == RoleBean.ADMIN;
+	boolean isStudent = isLogin && userBean.getRoleId() == RoleBean.STUDENT;
+	boolean isCollege = isLogin && userBean.getRoleId() == RoleBean.COLLEGE;
+	boolean isKiosk = isLogin && userBean.getRoleId() == RoleBean.KIOSK;
+	boolean isFaculty = isLogin && userBean.getRoleId() == RoleBean.FACULTY;
+
+	// ---- Per-menu permissions (Add / List) ----
+	boolean roleMenu = isAdmin;
+	boolean userMenu = isAdmin;
+	boolean moduleMenu = isAdmin;
+
+	boolean collegeAdd = isAdmin || isStudent || isKiosk;
+	boolean collegeList = isAdmin || isStudent || isKiosk || isFaculty;
+
+	boolean studentAdd = isAdmin || isFaculty || isCollege;
+	boolean studentList = isAdmin || isStudent || isFaculty || isCollege;
+
+	boolean marksheetAdd = isAdmin || isFaculty || isCollege;
+	boolean marksheetList = isAdmin || isFaculty || isCollege;
+	boolean marksheetExtra = isAdmin; // Get Marksheet + Merit List
+
+	boolean courseAdd = isAdmin || isStudent || isKiosk;
+	boolean courseList = isAdmin || isStudent || isKiosk || isFaculty || isCollege;
+
+	boolean subjectAdd = isAdmin || isStudent || isFaculty;
+	boolean subjectList = isAdmin || isStudent || isFaculty;
+
+	boolean facultyAdd = isAdmin || isStudent;
+	boolean facultyList = isAdmin || isStudent || isCollege;
 	%>
 
 	<!-- ================= NAVBAR ================= -->
-
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"> -->
 
 	<nav class="navbar navbar-expand-lg navbar-dark sticky-top"
 		style="background-color: #4169E1;">
@@ -199,307 +229,328 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 
-					<!-- ================= ROLE ================= -->
+					<!-- ================= ROLE (Admin only) ================= -->
 
+					<%
+					if (roleMenu) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="roleDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-person-badge"></i> Role
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="roleDropdown">
 
 							<li><a class="dropdown-item" href="<%=ORSView.ROLE_CTL%>">
-
 									<i class="bi bi-plus-circle me-2"></i> Add Role
-
 							</a></li>
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.ROLE_LIST_CTL%>"> <i
 									class="bi bi-list-ul me-2"></i> Role List
-
 							</a></li>
 
 						</ul></li>
+					<%
+					}
+					%>
 
 
-					<!-- ================= USER ================= -->
+					<!-- ================= USER (Admin only) ================= -->
 
+					<%
+					if (userMenu) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="userDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-people"></i> User
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="userDropdown">
 
 							<li><a class="dropdown-item" href="<%=ORSView.USER_CTL%>">
-
 									<i class="bi bi-person-plus me-2"></i> Add User
-
 							</a></li>
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.USER_LIST_CTL%>"> <i
 									class="bi bi-list-ul me-2"></i> User List
-
 							</a></li>
 
 						</ul></li>
+					<%
+					}
+					%>
 
 
 					<!-- ================= COLLEGE ================= -->
 
+					<%
+					if (collegeAdd || collegeList) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="collegeDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-building"></i> College
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="collegeDropdown">
 
+							<%
+							if (collegeAdd) {
+							%>
 							<li><a class="dropdown-item" href="<%=ORSView.COLLEGE_CTL%>">
-
 									<i class="bi bi-plus-circle me-2"></i> Add College
-
 							</a></li>
-
+							<%
+							}
+							if (collegeList) {
+							%>
 							<li><a class="dropdown-item"
 								href="<%=ORSView.COLLEGE_LIST_CTL%>"> <i
 									class="bi bi-list-ul me-2"></i> College List
-
 							</a></li>
+							<%
+							}
+							%>
 
 						</ul></li>
+					<%
+					}
+					%>
 
 
 					<!-- ================= STUDENT ================= -->
 
+					<%
+					if (studentAdd || studentList) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="studentDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-mortarboard"></i> Student
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="studentDropdown">
 
+							<%
+							if (studentAdd) {
+							%>
 							<li><a class="dropdown-item" href="<%=ORSView.STUDENT_CTL%>">
-
 									<i class="bi bi-person-plus me-2"></i> Add Student
-
 							</a></li>
-
+							<%
+							}
+							if (studentList) {
+							%>
 							<li><a class="dropdown-item"
 								href="<%=ORSView.STUDENT_LIST_CTL%>"> <i
 									class="bi bi-list-ul me-2"></i> Student List
-
 							</a></li>
+							<%
+							}
+							%>
 
 						</ul></li>
+					<%
+					}
+					%>
 
 
 					<!-- ================= MARKSHEET ================= -->
 
+					<%
+					if (marksheetAdd || marksheetList || marksheetExtra) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="marksheetDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-file-earmark-text"></i> Marksheet
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="marksheetDropdown">
 
+							<%
+							if (marksheetAdd) {
+							%>
 							<li><a class="dropdown-item"
 								href="<%=ORSView.MARKSHEET_CTL%>"> <i
 									class="bi bi-plus-circle me-2"></i> Add Marksheet
-
 							</a></li>
-
+							<%
+							}
+							if (marksheetList) {
+							%>
 							<li><a class="dropdown-item"
 								href="<%=ORSView.MARKSHEET_LIST_CTL%>"> <i
 									class="bi bi-list-ul me-2"></i> Marksheet List
-
 							</a></li>
-
+							<%
+							}
+							if (marksheetExtra) {
+							%>
 							<li><a class="dropdown-item"
 								href="<%=ORSView.GET_MARKSHEET_CTL%>"> <i
-									class="bi bi-card-text"></i></i> Get Marksheet
-
+									class="bi bi-card-text me-2"></i> Get Marksheet
 							</a></li>
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.MARKSHEET_MERIT_LIST_CTL%>"> <i
-									class="bi bi-card-text"></i> Merit Marksheet
-
+									class="bi bi-card-text me-2"></i> Merit Marksheet
 							</a></li>
+							<%
+							}
+							%>
 
 						</ul></li>
+					<%
+					}
+					%>
 
 
 					<!-- ================= COURSE ================= -->
 
+					<%
+					if (courseAdd || courseList) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="courseDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-book"></i> Course
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="courseDropdown">
 
+							<%
+							if (courseAdd) {
+							%>
 							<li><a class="dropdown-item" href="<%=ORSView.COURSE_CTL%>">
-
 									<i class="bi bi-plus-circle me-2"></i> Add Course
-
 							</a></li>
-
+							<%
+							}
+							if (courseList) {
+							%>
 							<li><a class="dropdown-item"
 								href="<%=ORSView.COURSE_LIST_CTL%>"> <i
 									class="bi bi-list-ul me-2"></i> Course List
-
 							</a></li>
+							<%
+							}
+							%>
 
 						</ul></li>
+					<%
+					}
+					%>
 
 
 					<!-- ================= SUBJECT ================= -->
 
+					<%
+					if (subjectAdd || subjectList) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="subjectDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-journal-bookmark"></i> Subject
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="subjectDropdown">
 
+							<%
+							if (subjectAdd) {
+							%>
 							<li><a class="dropdown-item" href="<%=ORSView.SUBJECT_CTL%>">
-
 									<i class="bi bi-plus-circle me-2"></i> Add Subject
-
 							</a></li>
-
+							<%
+							}
+							if (subjectList) {
+							%>
 							<li><a class="dropdown-item"
 								href="<%=ORSView.SUBJECT_LIST_CTL%>"> <i
 									class="bi bi-list-ul me-2"></i> Subject List
-
 							</a></li>
+							<%
+							}
+							%>
 
 						</ul></li>
+					<%
+					}
+					%>
 
 
 					<!-- ================= FACULTY ================= -->
 
+					<%
+					if (facultyAdd || facultyList) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="facultyDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-person-workspace"></i> Faculty
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="facultyDropdown">
 
+							<%
+							if (facultyAdd) {
+							%>
 							<li><a class="dropdown-item" href="<%=ORSView.FACULTY_CTL%>">
-
 									<i class="bi bi-person-plus me-2"></i> Add Faculty
-
 							</a></li>
-
+							<%
+							}
+							if (facultyList) {
+							%>
 							<li><a class="dropdown-item"
 								href="<%=ORSView.FACULTY_LIST_CTL%>"> <i
 									class="bi bi-list-ul me-2"></i> Faculty List
-
 							</a></li>
+							<%
+							}
+							%>
 
 						</ul></li>
+					<%
+					}
+					%>
 
 
+					<!-- ================= MODULE (Admin only) ================= -->
 
-					<!-- ================= MODULE ================= -->
-
+					<%
+					if (moduleMenu) {
+					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="moduleDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
 							<i class="bi bi-book"></i> Module
-
 					</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="moduleDropdown">
 
 							<%-- <li><a class="dropdown-item" href="<%=ORSView.VOTER_CTL%>">
-
 									<i class="bi bi-plus-circle me-2"></i> Add Voter
-
 							</a></li> --%>
 
-
 						</ul></li>
-
-
-					<!-- ================= TIMETABLE ================= -->
-
-					<%--
-					<li class="nav-item dropdown">
-
-						<a class="nav-link dropdown-toggle" href="#"
-							id="timetableDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-
-							<i class="bi bi-calendar3"></i>
-							TimeTable
-
-						</a>
-
-						<ul class="dropdown-menu dropdown-menu-dark"
-							aria-labelledby="timetableDropdown">
-
-							<li>
-								<a class="dropdown-item"
-									href="<%=ORSView.TIMETABLE_CTL%>">
-
-									<i class="bi bi-plus-circle me-2"></i>
-									Add TimeTable
-
-								</a>
-							</li>
-
-							<li>
-								<a class="dropdown-item"
-									href="<%=ORSView.TIMETABLE_LIST_CTL%>">
-
-									<i class="bi bi-list-ul me-2"></i>
-									TimeTable List
-
-								</a>
-							</li>
-
-						</ul>
-
-					</li>
-					--%>
+					<%
+					}
+					%>
 
 				</ul>
 
@@ -559,15 +610,12 @@
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.MY_PROFILE_CTL + "?id=" + userBean.getId()%>">
-
 									<i class="bi bi-person-circle me-2"></i> My Profile
-
 							</a></li>
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.CHANGE_PASSWORD_CTL%>"> <i
 									class="bi bi-key-fill me-2"></i> Change Password
-
 							</a></li>
 
 						</ul>
@@ -595,34 +643,22 @@
 
 				<ul class="navbar-nav ms-auto align-items-lg-center">
 
-
-					<!-- Welcome Button -->
-
 					<li class="nav-item"><a
 						class="btn btn-outline-light btn-sm me-2 px-3"
 						href="<%=ORSView.WELCOME_CTL%>"> <i
 							class="bi bi-house-door me-1"></i> Welcome
-
 					</a></li>
-
-
-					<!-- Login Button -->
 
 					<li class="nav-item"><a
 						class="btn btn-outline-light btn-sm me-2 px-3"
 						href="<%=ORSView.LOGIN_CTL%>"> <i
 							class="bi bi-box-arrow-in-right me-1"></i> Login
-
 					</a></li>
-
-
-					<!-- SignUp Button -->
 
 					<li class="nav-item"><a
 						class="btn btn-outline-light btn-sm me-2 px-3"
 						href="<%=ORSView.USER_REGISTRATION_CTL%>"> <i
 							class="bi bi-person-plus me-1"></i> SignUp
-
 					</a></li>
 
 				</ul>

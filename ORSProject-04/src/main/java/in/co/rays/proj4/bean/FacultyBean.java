@@ -53,6 +53,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @param collegeId ID of the college
 	 */
+	
 	public void setCollegeId(long collegeId) {
 		this.collegeId = collegeId;
 	}
@@ -62,6 +63,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @return college name
 	 */
+	
 	public String getCollegeName() {
 		return collegeName;
 	}
@@ -89,6 +91,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @param firstName first name
 	 */
+	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -107,6 +110,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @param lastName last name
 	 */
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
@@ -116,6 +120,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @return email address
 	 */
+	
 	public String getEmail() {
 		return email;
 	}
@@ -125,6 +130,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @param email email address
 	 */
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -161,6 +167,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @param address faculty address
 	 */
+	
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -170,6 +177,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @return gender
 	 */
+	
 	public String getGender() {
 		return gender;
 	}
@@ -179,6 +187,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @param gender faculty gender
 	 */
+	
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
@@ -188,6 +197,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @return date of birth
 	 */
+	
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -197,6 +207,7 @@ public class FacultyBean extends BaseBean {
 	 *
 	 * @param dateOfBirth faculty date of birth
 	 */
+	
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}

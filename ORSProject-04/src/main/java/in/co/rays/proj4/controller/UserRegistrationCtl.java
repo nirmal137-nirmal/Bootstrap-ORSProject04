@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * Handles user registration requests and processes new user account creation.
  * 
  * @author Nirmal Fayake
+ * 
  * @version 1.0
  */
 @WebServlet("/UserRegistrationCtl")
